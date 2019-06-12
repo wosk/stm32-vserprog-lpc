@@ -74,7 +74,7 @@ ifeq ($(DEBUG),DEBUG_ENABLE_SEMIHOST)
 OBJS += semihosting.o
 endif
 else
-CFLAGS += -O3
+CFLAGS += -O3 -std=gnu99
 endif
 
 CFLAGS  += -fno-common -ffunction-sections -fdata-sections -funit-at-a-time
@@ -113,7 +113,7 @@ $(DMP): $(ELF)
 $(LIBOPENCM3):
 	git submodule init
 	git submodule update --remote
-	CFLAGS="$(CFLAGS)" PREFIX="$(CROSS:-=)" make -C libopencm3 $(OPENCM3_MK) V=1
+	CFLAGS="$(CFLAGS)" PREFIX="$(CROSS)" make -C libopencm3 $(OPENCM3_MK) V=1
 
 .PHONY: clean distclean flash reboot size
 
